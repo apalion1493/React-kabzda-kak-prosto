@@ -6,21 +6,25 @@ import {Rating} from "./components/Rating/Rating";
 function App() {
   return (
     <div className="App">
-        <h1>
-            <AppTitle title={'Random text'}/>
-        </h1>
+        <AppTitle title={'Random text'}/>
         <div>Article 1</div>
         <Rating value={3}/>
 
         <div>Article 2</div>
         <Rating value={5}/>
-        <Accordion title={'Accordion title'}/>
+        <Accordion titleValue={'Accordion title 1'} collapsed={true}/>
+        <br/>
+        <Accordion titleValue={'Accordion title 2'} collapsed={false}/>
     </div>
   );
 }
 
-function AppTitle(props: any) {
-    return props.title
+type AppTitleProps = {
+    title: string
+}
+
+function AppTitle(props: AppTitleProps) {
+    return <h1>{props.title}</h1>
 }
 
 export default App;
