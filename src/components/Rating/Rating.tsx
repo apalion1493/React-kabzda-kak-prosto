@@ -1,48 +1,49 @@
-import React, {useState} from "react";
+import React from "react";
 import './Rating.css';
 
-export function Rating() {
-    let [value, setValue] = useState(0)
+export function Rating(props: RatingPropsType) {
 
     return (
         <ul className="rating">
             <li>
-                <Star selected={value > 0}/>
-                <button onClick={() => {setValue(1)}}>1</button>
+                <Star onClick={props.onClick} selected={props.value > 0} value={1}/>
             </li>
             <li>
-                <Star selected={value > 1}/>
-                <button onClick={() => {setValue(2)}}>2</button>
+                <Star onClick={props.onClick} selected={props.value > 1} value={2}/>
             </li>
             <li>
-                <Star selected={value > 2}/>
-                <button onClick={() => {setValue(3)}}>3</button>
+                <Star onClick={props.onClick} selected={props.value > 2} value={3}/>
             </li>
             <li>
-                <Star selected={value > 3}/>
-                <button onClick={() => {setValue(4)}}>4</button>
+                <Star onClick={props.onClick} selected={props.value > 3} value={4}/>
             </li>
             <li>
-                <Star selected={value > 4}/>
-                <button onClick={() => {setValue(5)}}>5</button>
+                <Star onClick={props.onClick} selected={props.value > 4} value={5}/>
             </li>
         </ul>
     )
 }
 
-type StarPropsType = {
-    selected: boolean
+export type RatingValueType = 0 | 1 | 2 | 3 | 4 | 5;
+
+export type RatingPropsType = {
+    value: RatingValueType
+    onClick: (value: RatingValueType) => void
 }
 
-function Star(props: StarPropsType) {
-    if (props.selected) {
-        return (
-           <span><b>STAR-</b> </span>
-        )
-    } else {
-        return (
-            <span>STAR-</span>
-        )
-    }
+type StarPropsType = {
+    selected: boolean
+    onClick: (value: RatingValueType) => void
+    value: RatingValueType
+}
 
+let Star = (props: StarPropsType) => {
+    return (
+        <span onClick={() => {props.onClick(props.value)}}>
+            {
+                props.selected ? <b>STAR | </b> : 'STAR | '
+            }
+        </span>
+
+    )
 }
